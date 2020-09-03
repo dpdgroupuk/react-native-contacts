@@ -731,7 +731,8 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
                         .withValue(CommonDataKinds.StructuredPostal.CITY, address.getString("city"))
                         .withValue(CommonDataKinds.StructuredPostal.REGION, address.getString("state"))
                         .withValue(CommonDataKinds.StructuredPostal.POSTCODE, address.getString("postCode"))
-                        .withValue(CommonDataKinds.StructuredPostal.COUNTRY, address.getString("country"));
+                        .withValue(CommonDataKinds.StructuredPostal.COUNTRY, address.getString("country"))
+                        .withValue(CommonDataKinds.StructuredPostal.NEIGHBORHOOD, address.getString("neighborhood"));
 
                 ops.add(op.build());
             }
@@ -871,6 +872,7 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
         String[] postalAddressesPostCode = null;
         String[] postalAddressesCountry = null;
         Integer[] postalAddressesType = null;
+        String[] postalAddressesNeighborhood = null;
         String[] postalAddressesLabel = null;
         if (postalAddresses != null) {
             numOfPostalAddresses = postalAddresses.size();
@@ -880,6 +882,7 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
             postalAddressesRegion = new String[numOfPostalAddresses];
             postalAddressesPostCode = new String[numOfPostalAddresses];
             postalAddressesCountry = new String[numOfPostalAddresses];
+            postalAddressesNeighborhood = new String[numOfPostalAddresses];
             postalAddressesType = new Integer[numOfPostalAddresses];
             postalAddressesLabel = new String[numOfPostalAddresses];
             for (int i = 0; i < numOfPostalAddresses; i++) {
@@ -890,6 +893,7 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
                 postalAddressesRegion[i] = getValueFromKey(postalAddresses.getMap(i),"region");
                 postalAddressesPostCode[i] = getValueFromKey(postalAddresses.getMap(i), "postCode");
                 postalAddressesCountry[i] = getValueFromKey(postalAddresses.getMap(i), "country");
+                postalAddressesNeighborhood[i] = getValueFromKey(postalAddresses.getMap(i), "neighborhood");
                 postalAddressesType[i] = mapStringToPostalAddressType(postalLabel);
                 postalAddressesLabel[i] = postalLabel;
             }
@@ -1039,7 +1043,8 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
                         .withValue(CommonDataKinds.StructuredPostal.CITY, postalAddressesCity[i])
                         .withValue(CommonDataKinds.StructuredPostal.REGION, postalAddressesState[i])
                         .withValue(CommonDataKinds.StructuredPostal.POSTCODE, postalAddressesPostCode[i])
-                        .withValue(CommonDataKinds.StructuredPostal.COUNTRY, postalAddressesCountry[i]);
+                        .withValue(CommonDataKinds.StructuredPostal.COUNTRY, postalAddressesCountry[i])
+                        .withValue(CommonDataKinds.StructuredPostal.NEIGHBORHOOD, postalAddressesNeighborhood[i]);
                 ops.add(op.build());
             }
         }
