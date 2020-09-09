@@ -305,6 +305,7 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
         String[] postalAddressesRegion = null;
         String[] postalAddressesPostCode = null;
         String[] postalAddressesCountry = null;
+        String[] postalAddressesNeighborhood = null;
         Integer[] postalAddressesLabel = null;
         if (postalAddresses != null) {
             numOfPostalAddresses = postalAddresses.size();
@@ -314,6 +315,7 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
             postalAddressesRegion = new String[numOfPostalAddresses];
             postalAddressesPostCode = new String[numOfPostalAddresses];
             postalAddressesCountry = new String[numOfPostalAddresses];
+            postalAddressesNeighborhood = new String[numOfPostalAddresses];
             postalAddressesLabel = new Integer[numOfPostalAddresses];
             for (int i = 0; i < numOfPostalAddresses; i++) {
                 postalAddressesStreet[i] = postalAddresses.getMap(i).getString("street");
@@ -322,6 +324,7 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
                 postalAddressesRegion[i] = postalAddresses.getMap(i).getString("region");
                 postalAddressesPostCode[i] = postalAddresses.getMap(i).getString("postCode");
                 postalAddressesCountry[i] = postalAddresses.getMap(i).getString("country");
+                postalAddressesNeighborhood[i] = postalAddresses.getMap(i).getString("neighborhood");
                 postalAddressesLabel[i] = mapStringToPostalAddressType(postalAddresses.getMap(i).getString("label"));
             }
         }
@@ -576,7 +579,8 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
                         .withValue(CommonDataKinds.StructuredPostal.CITY, address.getString("city"))
                         .withValue(CommonDataKinds.StructuredPostal.REGION, address.getString("state"))
                         .withValue(CommonDataKinds.StructuredPostal.POSTCODE, address.getString("postCode"))
-                        .withValue(CommonDataKinds.StructuredPostal.COUNTRY, address.getString("country"));
+                        .withValue(CommonDataKinds.StructuredPostal.COUNTRY, address.getString("country"))
+                        .withValue(CommonDataKinds.StructuredPostal.NEIGHBORHOOD, address.getString("neighborhood"));
 
                 ops.add(op.build());
             }
@@ -703,6 +707,7 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
         String[] postalAddressesRegion = null;
         String[] postalAddressesPostCode = null;
         String[] postalAddressesCountry = null;
+        String[] postalAddressesNeighborhood = null;
         Integer[] postalAddressesType = null;
         String[] postalAddressesLabel = null;
         if (postalAddresses != null) {
@@ -713,6 +718,7 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
             postalAddressesRegion = new String[numOfPostalAddresses];
             postalAddressesPostCode = new String[numOfPostalAddresses];
             postalAddressesCountry = new String[numOfPostalAddresses];
+            postalAddressesNeighborhood = new String[numOfPostalAddresses];
             postalAddressesType = new Integer[numOfPostalAddresses];
             postalAddressesLabel = new String[numOfPostalAddresses];
             for (int i = 0; i < numOfPostalAddresses; i++) {
@@ -723,6 +729,7 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
                 postalAddressesRegion[i] = getValueFromKey(postalAddresses.getMap(i),"region");
                 postalAddressesPostCode[i] = getValueFromKey(postalAddresses.getMap(i), "postCode");
                 postalAddressesCountry[i] = getValueFromKey(postalAddresses.getMap(i), "country");
+                postalAddressesNeighborhood[i] = getValueFromKey(postalAddresses.getMap(i), "neighborhood");
                 postalAddressesType[i] = mapStringToPostalAddressType(postalLabel);
                 postalAddressesLabel[i] = postalLabel;
             }
